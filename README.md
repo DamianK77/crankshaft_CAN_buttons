@@ -1,32 +1,9 @@
-# _Sample project_
+# ESP-IDF project for CrankshaftNG media control using CAN inputs
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+This ESP-IDF (developed on ESP32S3) project emulates a keyboard based on messages received over CAN bus. If plugged into the right CAN line in a car it can read button presses eg. on the steering wheel and, for example, skip a song.
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+## Functions
+- Virtually pressing buttons based on received CAN messages
 
-
-
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
-
-## Example folder contents
-
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
-
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
-
-Below is short explanation of remaining files in the project folder.
-
-```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
-```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+## How to use
+Your ESP32 chip must have tinyusb support to register as a device (eg. ESP32 S3). It also has to have a TWAI controller on board. You will need an external transceiver module such as SN65HVD230. You will need to set in menuconfig the Tinyusb hid device count to 1 from 0 in order to compile it successfully.
