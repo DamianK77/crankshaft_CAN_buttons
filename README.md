@@ -7,3 +7,6 @@ This ESP-IDF (developed on ESP32S3) project emulates a keyboard based on message
 
 ## How to use
 Your ESP32 chip must have tinyusb support to register as a device (eg. ESP32 S3). It also has to have a TWAI controller on board. You will need an external transceiver module such as SN65HVD230. You will need to set in menuconfig the Tinyusb hid device count to 1 from 0 in order to compile it successfully.
+
+You will need to modify the conditions for the received messages. To know the correct ID and bits of the message you will need to sniff the messages. You can do it using this other repo and a program from adamtheone 
+https://github.com/DamianK77/can_obd_reader
