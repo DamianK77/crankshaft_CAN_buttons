@@ -142,18 +142,19 @@ void app_main()
     while (1) {
         //Wait for message to be received
         twai_message_t message;
+        twai_clear_receive_queue();
         twai_receive(&message, pdMS_TO_TICKS(10000));
         bool pressed = false;
 
         if (message.identifier == 0x175) { //message is from steering wheel
-            if (message.data[5] == 0x5 && pressed == false) { //button down
+            if (message.data[5] == 0x5 && pressed == false) { //button down, prev song
                 send_keycode(HID_KEY_V);
-                twai_clear_receive_queue();
+                vTaskDelay(800/portTICK_PERIOD_MS);
                 pressed = true;
             }
-            if (message.data[5] == 0x4 && pressed == false) { //button up
+            if (message.data[5] == 0x4 && pressed == false) { //button up, next song
                 send_keycode(HID_KEY_N);
-                twai_clear_receive_queue();
+                vTaskDelay(800/portTICK_PERIOD_MS);
                 pressed = true;
             }
             if (message.data[5] == 0x0) { //clear, no buttons pressed
